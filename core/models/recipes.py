@@ -6,25 +6,34 @@ from pytils.translit import slugify
 from core.models.ingredients import Ingredient
 from core.models.tags import Tag
 
+user = get_user_model()
+
 
 class Recipe(models.Model):
-    title = models.CharField(max_length=255, verbose_name='Наименование')
+    title = models.CharField(
+        max_length=255,
+        verbose_name='Наименование')
     description = models.TextField()
-    ingredients = models.ManyToManyField(Ingredient,
-                                         related_name='recipe_ingredient',
-                                         verbose_name='Ингредиенты')
+    ingredients = models.ManyToManyField(
+        Ingredient,
+        related_name='recipe_ingredient',
+        verbose_name='Ингредиенты')
+
     tags = models.ManyToManyField(Tag, verbose_name='тэги')
     cooking_time = models.IntegerField(verbose_name='Время приготовления')
     slug = models.SlugField(blank=True, null=True)
-    image = models.ImageField(upload_to='main_image/',
-                              height_field=None,
-                              width_field=None,
-                              verbose_name='Главное изображение')
-    author = models.ForeignKey(get_user_model(),
-                               on_delete=models.CASCADE,
-                               verbose_name='Автор')
-    create_date = models.DateTimeField(auto_now_add=True,
-                                       verbose_name='Дата публикации')
+    image = models.ImageField(
+        upload_to='main_image/',
+        height_field=None,
+        width_field=None,
+        verbose_name='Главное изображение')
+    author = models.ForeignKey(
+        user,
+        on_delete=models.CASCADE,
+        verbose_name='Автор')
+    create_date = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата публикации')
 
     class Meta:
         ordering = ['-create_date']

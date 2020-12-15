@@ -1,21 +1,26 @@
+{% load filters_recipe %}
+{% load static %}
 {% block content %}
-    {% load static %}
 <div class="card" data-id="{{ item.id }}">
     <a href="{% url 'recipe_detail' item.id  %}" class="link" target="_blank"><img src="{{ item.image.url }}" alt="Какой-то текст" class="card__image"></a>
     <div class="card__body">
         <a class="card__title link" href="#" target="_blank">{{ item.title}}</a>
         <ul class="card__items">
-            <li class="card__item"><span class="badge badge_style_green">Обед</span></li>
-            <li class="card__item"><span class="badge badge_style_orange">Завтрак</span></li>
-            <li class="card__item"><span class="badge badge_style_purple">Ужин</span></li>
+            {% for tag in item.tags.all %}
+                <li class="single-card__item"><span class="badge badge_style_{{ tag.view }}">{{ tag.title }}</span></li>
+            {% endfor %}
         </ul>
         <div class="card__items card__items_column">
             <p class="card__text"><span class="icon-time"></span> {{ item.cooking_time}}</p>
-            <p class="card__text"><span class="icon-user"></span> <a href="#" style="color: black">{{ item.author }}</a></p>
+            <p class="card__text"><span class="icon-user"></span> <a href="{% url 'profile' item.author.username %}" style="color: black">{{ item.author }}</a></p>
         </div>
     </div>
     <div class="card__footer">
-        <button class="button button_style_light-blue" name="purchases" data-out><span class="icon-plus button__icon"></span>Добавить в покупки</button>
+                {% if request|is_in_purchases:item %}
+                    <button class="button button_style_light-blue-outline" name="purchases"><span class="icon-check button__icon"></span>Рецепт добавлен</button>
+                {% else %}
+                    <button class="button button_style_light-blue" name="purchases" data-out><span class="icon-plus button__icon"></span>Добавить в покупки</button>
+                {% endif%}
         <button class="button button_style_none" name="favorites" data-out><span class="icon-favorite"></span></button>
     </div>
 </div>

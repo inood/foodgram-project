@@ -6,12 +6,16 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.contrib.flatpages import views
 
+
+handler404 = "core.views.service.page_not_found"  # noqa
+handler500 = "core.views.service.server_error"  # noqa
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('users.urls')),
+    path('api/', include('api.urls')),
     # path('auth/', include('django.contrib.auth.urls')),
     path('', include('core.urls')),
-    path('api/', include('api.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
 ]
 

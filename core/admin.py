@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from core.models import Subscription, Favorite, Cart
 from core.models.ingredients import BaseIngredient, Ingredient
 from core.models.recipes import Recipe
 from core.models.tags import Tag
@@ -31,4 +32,19 @@ class RecipeAdmin(admin.ModelAdmin):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Subscription)
+class SubscriptionAdmin(admin.ModelAdmin):
+    list_display = ['user', 'author']
+
+
+@admin.register(Favorite)
+class FavoriteAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
     pass

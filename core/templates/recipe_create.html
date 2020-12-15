@@ -10,24 +10,28 @@
 
 {% block content %}
 <main class="main container">
+
     <div class="main__header">
-        <h1 class="main__title">Редактирование рецепта</h1>
+        <h1 class="main__title">Создание рецепта</h1>
     </div>
+
     <div class="form-container">
         <form class="form" method="post" enctype="multipart/form-data">
-{#        <------------->#}
-        {% csrf_token %}
+            {% csrf_token %}
+
             <div class="form__group">
                 <label for="id_name" class="form__label">Название рецепта</label>
+
                 <div class="form__field-group">
                     <input type="text" id="id_name" name="title" class="form__input" value="{{ recipe.title }}">
                     <span class="form__error"></span>
                 </div>
+
             </div>
+
             <div class="form__group">
                 <p class="form__label">Теги</p>
                 <div class="form__field-group">
-
                     <div class="tags">
                         {% for tag_choice, tag_value in form.tags.field.choices %}
                             <div class="tags__item">
@@ -36,14 +40,16 @@
                             </div>
                         {% endfor %}
                     </div>
-
                     <span class="form__error">{{ form.tags.errors }}</span>
-
                 </div>
+
             </div>
+
             <div class="form__group">
                 <label for="nameIngredient" class="form__label">Ингредиенты</label>
+
                 <div class="form__field-group">
+
                     <div class="form__field-group-ingredientes">
 
                         <div class="form__dropdown">
@@ -52,37 +58,29 @@
                         </div>
 
                         <input type="number" id="cantidad" class="form__input" min="0">
+
                         <label for="cantidad" class="form__label" id="cantidadVal">шт.</label>
                     </div>
-
                     <div class="form__field-group-ingredientes-container">
-                        <div class="form__field-item-ingredient" id="ing_3">
-                            <span> Оливки 10шт.</span>
-                            <span class="form__field-item-delete"></span>
-                            <input id="nameIngredient_3" name="nameIngredient_3" type="hidden" value="Оливки">
-                            <input id="valueIngredient_3" name="valueIngredient_3" type="hidden" value="10">
-                            <input id="unitsIngredient_3" name="unitsIngredient_3" type="hidden" value="шт.">
-                        </div>
-                        <div class="form__field-item-ingredient" id="ing_2">
-                            <span> Картошка 5шт.</span>
-                            <span class="form__field-item-delete"></span>
-                            <input id="nameIngredient_2" name="nameIngredient_2" type="hidden" value="Картошка">
-                            <input id="valueIngredient_2" name="valueIngredient_2" type="hidden" value="5">
-                            <input id="unitsIngredient_2" name="unitsIngredient_2" type="hidden" value="шт.">
-                        </div>
+
                     </div>
+
                     <span class="form__ingredient-link" id="addIng">Добавить ингредиент</span>
                     <span class="form__error"></span>
                 </div>
+
+
             </div>
+
             <div class="form__group">
                 <label for="id_time" class="form__label">Время приготовления</label>
                 <div class="form__field-group form__field-group_time">
-                    <input type="text" id="id_time" name="name" class="form__input">
+                    <input type="text" id="id_time" name="cooking_time" class="form__input">
                     <label for="id_time" class="form__label">минут</label>
                     <span class="form__error"></span>
                 </div>
             </div>
+
             <div class="form__group">
                 <label for="id_description" class="form__label">Описание</label>
                 <div class="form__field-group">
@@ -90,17 +88,19 @@
                     <span class="form__error"></span>
                 </div>
             </div>
+
             <div class="form__group">
                 <span class="form__label">Загрузить фото</span>
                 <div class="form__field-group">
-                    <label for="id_file" class="form__file-button">Выбрать файл</label>
-                    <input type="file" class="form__file" name="file" id="id_file">
+                    <input type="file" name="image" id="id_file" value="{{ recipe.image }}">
                     <span class="form__error"></span>
                 </div>
             </div>
+
             <div class="form__footer">
-                <button class="button button_style_blue">Сохранить</button> <a style="margin-left: 2.5em" href="#" class="form__ingredient-link">Удалить</a>
+                <button class="button button_style_blue">Создать рецепт</button>
             </div>
+
         </form>
     </div>
 </main>

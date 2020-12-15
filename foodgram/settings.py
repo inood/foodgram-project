@@ -19,12 +19,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
+    'rest_framework',
 
     'core.apps.CoreConfig',
     'api.apps.ApiConfig',
     'users.apps.UsersConfig',
 
     'debug_toolbar',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +56,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processor.get_cart_count',
             ],
         },
     },
@@ -97,6 +100,8 @@ USE_TZ = True
 
 SITE_ID = 1
 
+
+
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -105,3 +110,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = '/auth/login/'
 LOGIN_REDIRECT_URL = 'index'
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
