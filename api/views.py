@@ -1,8 +1,6 @@
 from django.http import JsonResponse
-from django.shortcuts import render
 
 from rest_framework.generics import CreateAPIView, DestroyAPIView
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from api.serializers import SubscribeSerializer, FavoriteSerializer, \

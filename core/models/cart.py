@@ -23,4 +23,3 @@ class Cart(models.Model):
 
     def __str__(self):
         return self.recipe.title
-

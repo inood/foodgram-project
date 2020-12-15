@@ -13,12 +13,6 @@ User = get_user_model()
 def subscribe(request):
     subscribtions = User.objects.filter(
         following__user=request.user)
-    # ).annotate(
-    #     recipe_count=Count(
-    #         'recipes'
-    #     )
-    # )
-
     recipe: dict = {}
     for sub in subscribtions:
         recipe[sub] = Recipe.objects.filter(

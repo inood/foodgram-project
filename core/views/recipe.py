@@ -61,8 +61,6 @@ def recipe_detail(request, recipe_id):
         'recipe_owner': recipe_owner,
         'is_subscribed':  Subscription.objects.filter(
                 author=recipe.author, user=request.user)
-
-        # 'profile': profile,
     }
 
     return render(request, 'recipe_detail.html', context)
