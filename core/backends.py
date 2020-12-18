@@ -19,7 +19,8 @@ def get_ingredients(request):
 def get_tags(request):
     data = request.POST.copy()
     tags = []
-    for value in ['lunch', 'dinner', 'breakfast']:
+    for value in Tag.objects.all().values_list(
+            'value', flat=True):
         if value in data and data.get(value) == 'on':
             tag = get_object_or_404(Tag, value=value)
             tags.append(tag)
