@@ -57,7 +57,7 @@
                                 class="single-card__text"><span
                                 class="icon-user"></span>
                             {{ recipe.author }}</p></li>
-                        {% if owner %}
+                        {% if recipe_owner %}
                             <li class="single-card__item"><a
                                     style="margin-left: 2.5em"
                                     href="{% url 'recipe_edit' recipe.id %}"
@@ -67,12 +67,11 @@
                     </ul>
                 </div>
                 <ul class="single-card__items">
-                    {#                {% if not request|is_in_purchases:recipe %}#}
-                    {#                    <li class="single-card__item"><button class="button button_style_blue" name="purchases" data-out><span class="icon-plus button-icon"></span> Добавить в покупки</button></li>#}
-                    {#                {% else %}#}
-                    {#                    <li class="single-card__item"><button class="button button_style_blue-outline" name="purchases"><span class="icon-check button-icon"></span> Рецепт добавлен</button></li>#}
-                    {#                {% endif%}#}
-
+                {% if not request|is_in_purchases:recipe %}
+                    <li class="single-card__item"><button class="button button_style_blue" name="purchases" data-out><span class="icon-plus button-icon"></span> Добавить в покупки</button></li>
+                {% else %}
+                    <li class="single-card__item"><button class="button button_style_blue-outline" name="purchases"><span class="icon-check button-icon"></span> Рецепт добавлен</button></li>
+                {% endif%}
                     {% if user.is_authenticated and user != recipe.author %}
                         <li class="single-card__item">
                             <button class="button button_style_light-blue button_size_subscribe"

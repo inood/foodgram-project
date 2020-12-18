@@ -1,4 +1,4 @@
-from core.models.cart import Cart
+from core.models import Cart
 
 
 def get_cart_count(request):

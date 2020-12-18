@@ -3,7 +3,8 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = '7)&a@dmqk0e%hwlqk(7q&sodfzt15aby$et7(!b478#h06lx7%'
+    # os.getenv('SECRET_KEY')
 
 DEBUG = True
 
@@ -99,7 +100,8 @@ USE_TZ = True
 
 SITE_ID = 1
 
-
+ITEM_COUNT = 6
+BASIC_TAG_COUNT = 3
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

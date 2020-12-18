@@ -1,6 +1,7 @@
 from django import forms
 
 from core.models import Recipe
+from foodgram.settings import ITEM_COUNT
 
 
 class RecipeForm(forms.ModelForm):
@@ -8,6 +9,8 @@ class RecipeForm(forms.ModelForm):
         model = Recipe
         fields = ('title', 'description', 'cooking_time', 'tags', 'image')
         widgets = {
-            'description': forms.Textarea({'rows': 6}),
+            'description': forms.Textarea({'rows': ITEM_COUNT}),
             'tags': forms.CheckboxSelectMultiple()
             }
+
+

@@ -35,8 +35,8 @@
                     <div class="tags">
                         {% for tag_choice, tag_value in form.tags.field.choices %}
                             <div class="tags__item">
-                                <input type="checkbox" name="tags" value="{{ tag_choice.instance.pk }}" id="id_{{ tag_choice.instance.value }}" class="tags__checkbox tags__checkbox_style_{{ tag_choice.instance.style }}">
-                                <label for="id_{{ tag_choice.instance.value }}" class="tags__label">{{ tag_choice.instance.name }}</label>
+                                <input type="checkbox" name="tags" value="{{ tag_choice.instance.pk }}" id="id_{{ tag_choice.instance.value }}" class="tags__checkbox tags__checkbox_style_{{ tag_choice.instance.view }}">
+                                <label for="id_{{ tag_choice.instance.value }}" class="tags__label">{{ tag_choice.instance.title }}</label>
                             </div>
                         {% endfor %}
                     </div>

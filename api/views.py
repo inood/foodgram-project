@@ -1,19 +1,19 @@
 from django.http import JsonResponse
-
 from rest_framework.generics import CreateAPIView, DestroyAPIView
 from rest_framework.response import Response
 
-from api.serializers import SubscribeSerializer, FavoriteSerializer, \
-    CartSerializer
-from core.models import BaseIngredient, Subscription, get_user_model, Recipe, \
-    Favorite, Cart
+from api.serializers import (CartSerializer, FavoriteSerializer,
+                             SubscribeSerializer)
+from core.models import (BaseIngredient, Cart, Favorite, Recipe, Subscription,
+                         get_user_model)
 
 User = get_user_model()
 
 
 def ingredients(request):
     query_text = request.GET['query']
-    ingredients_items = BaseIngredient.objects.filter(title__istartswith=query_text.lower())
+    ingredients_items = BaseIngredient.objects.filter(
+        title__istartswith=query_text.lower())
 
     response_data = []
 

@@ -1,10 +1,10 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 
 from core.backends import get_ingredients, get_tags
-from core.models import Recipe, Ingredient, Tag, Subscription
 from core.forms import RecipeForm
+from core.models import Ingredient, Recipe, Subscription, Tag
 
 User = get_user_model()
 
@@ -52,7 +52,6 @@ def recipe_detail(request, recipe_id):
         )
 
     recipe_owner = False
-    # profile = get_object_or_404(User, username=request.user)
 
     if request.user == recipe.author:
         recipe_owner = True

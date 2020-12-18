@@ -1,6 +1,8 @@
 import json
+
 from django.core.management.base import BaseCommand
-from core.models.ingredients import BaseIngredient
+
+from core.models import BaseIngredient
 
 
 def load():

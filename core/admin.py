@@ -1,9 +1,7 @@
 from django.contrib import admin
 
-from core.models import Subscription, Favorite, Cart
-from core.models.ingredients import BaseIngredient, Ingredient
-from core.models.recipes import Recipe
-from core.models.tags import Tag
+from core.models import (BaseIngredient, Cart, Favorite, Ingredient, Recipe,
+                         Subscription, Tag)
 
 
 @admin.register(BaseIngredient)
@@ -32,7 +30,7 @@ class RecipeAdmin(admin.ModelAdmin):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['title', 'is_basic']
 
 
 @admin.register(Subscription)

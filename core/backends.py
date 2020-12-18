@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 
-from core.models import Tag, BaseIngredient
+from core.models import BaseIngredient, Tag
 
 
 def get_ingredients(request):
