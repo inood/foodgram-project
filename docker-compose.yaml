@@ -1,0 +1,35 @@
+version: '3'
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
+
+services:
+  db:
+    image: postgres:13.0-alpine
+    volumes:
+      -   postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env
+
+  web:
+    image: jetdj/foodgram:latest
+    restart: always
+    volumes:
+      - static_volume:/core/static
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - static_volume:/core/static
+      - media_volume:/media
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - 80:80
+    depends_on:
+      - web
+
