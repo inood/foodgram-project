@@ -15,6 +15,7 @@ services:
   web:
     image: jetdj/foodgram:latest
     restart: always
+    command: sh -c "python manage.py makemigrations --noinput && python manage.py migrate && python manage.py load_ingredients --noinput && gunicorn foodgram.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - static_volume:/core/static
     depends_on:
