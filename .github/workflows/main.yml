@@ -39,7 +39,7 @@ jobs:
             sudo docker-compose down
             sudo docker rmi jetdj/foodgram -f
             sudo docker pull jetdj/foodgram:latest
-            sudo docker-compose up --force-recreate -d web
+            cd code && sudo docker-compose up --force-recreate -d web
             sudo docker image prune -f
 
   send_message:
