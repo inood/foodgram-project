@@ -40,7 +40,7 @@ jobs:
             password: ${{ secrets.ROOT_PASS }}
             strip_components: 1
             source: '.env, nginx/default.conf, docker-compose.yaml'
-            target: '/home/jet/code'
+            target: '/home/code'
 
         - name: executing remote ssh commands to deploy
           uses: appleboy/ssh-action@master
@@ -49,8 +49,7 @@ jobs:
             username: ${{ secrets.ROOT_NAME }}
             password: ${{ secrets.ROOT_PASS }}
             script: |
-              cd ~
-              cd /home/jet/code
+              cd /home/code
               sudo docker rmi jetdj/foodgram -f
               sudo docker pull jetdj/foodgram:latest
               sudo docker-compose up --force-recreate -d web
