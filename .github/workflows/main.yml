@@ -68,7 +68,6 @@ jobs:
             script: |
               cd /home/code
               sudo docker rmi jetdj/foodgram -f
-              sudo docker pull jetdj/foodgram:latest
               sudo docker-compose up --force-recreate -d web
 
 
