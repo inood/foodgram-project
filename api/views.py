@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from rest_framework.generics import CreateAPIView, DestroyAPIView
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from api.serializers import (CartSerializer, FavoriteSerializer,
@@ -58,6 +59,14 @@ class FavoriteDeleteAPIView(DestroyAPIView):
 
 class CartAddAPIView(CreateAPIView):
     serializer_class = CartSerializer
+    queryset = Recipe.objects.all()
+    permission_classes = [AllowAny]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(request=request)
+        return Response(data={"success": True})
 
 
 class CartDeleteAPIView(DestroyAPIView):
