@@ -50,7 +50,7 @@ jobs:
             password: ${{ secrets.ROOT_PASS }}
             script: |
               cd ~
-              cd ./code
+              cd /home/jet/code
               sudo docker rmi jetdj/foodgram -f
               sudo docker pull jetdj/foodgram:latest
               sudo docker-compose up --force-recreate -d web
