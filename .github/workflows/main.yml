@@ -35,7 +35,7 @@ jobs:
             host: ${{ secrets.HOST }}
             username: ${{ secrets.ROOT_NAME }}
             password: ${{ secrets.ROOT_PASS }}
-            script: |
+            run: |
               sudo docker rmi jetdj/foodgram -f
               sudo docker pull jetdj/foodgram:latest
               sudo docker-compose up --force-recreate -d web
