@@ -49,7 +49,7 @@ jobs:
             username: ${{ secrets.ROOT_NAME }}
             password: ${{ secrets.ROOT_PASS }}
             script: |
-              cd foodgram-project
+              cd home/foodgram-project
               mv ./nginx/docker-compose.yaml .
               sudo docker pull jetdj/foodgram
               sudo docker stop $(sudo docker ps -a -q)
