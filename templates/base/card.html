@@ -15,14 +15,13 @@
             <p class="card__text"><span class="icon-user"></span> <a href="{% url 'profile' item.author.username %}" style="color: black">{{ item.author }}</a></p>
         </div>
     </div>
-</div>
     <div class="card__footer">
-                {% if request|is_in_purchases:item %}
+                {% if request|is_in_purchases:item.id %}
                     <button class="button button_style_light-blue-outline" name="purchases"><span class="icon-check button__icon"></span>Рецепт добавлен</button>
                 {% else %}
                     <button class="button button_style_light-blue" name="purchases" data-out><span class="icon-plus button__icon"></span>Добавить в покупки</button>
                 {% endif%}
         <button class="button button_style_none" name="favorites" data-out><span class="icon-favorite"></span></button>
     </div>
-
+</div>
 {% endblock %}
