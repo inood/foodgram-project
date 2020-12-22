@@ -5,6 +5,7 @@
 {% block head %}
      <link rel="stylesheet" href="{% static '/pages/index.css' %}">
 {% endblock %}
+{% csrf_token %}
 {% block content %}
    <main class="main container">
    <div class="main__header">

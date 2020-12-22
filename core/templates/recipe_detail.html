@@ -7,7 +7,7 @@
 {% block head %}
     <link rel="stylesheet" href="{% static '/pages/single.css' %}">
 {% endblock %}
-
+{% csrf_token %}
 {% block content %}
 
     <main class="main container">
