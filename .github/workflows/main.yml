@@ -37,8 +37,9 @@ jobs:
             password: ${{ secrets.ROOT_PASS }}
             script: |
               sudo docker rmi jetdj/foodgram -f
+              sudo docker pull jetdj/foodgram:latest
             run:
-              docker-compose up -d --remove-orphans --force-recreate
+              docker-compose up --force-recreate -d web
 
   send_message:
     runs-on: ubuntu-latest
