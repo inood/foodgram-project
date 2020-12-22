@@ -52,7 +52,7 @@ jobs:
               cd home/foodgram-project
               sudo docker pull jetdj/foodgram
               sudo docker rmi jetdj/foodgram -f
-              sudo docker-compose up -d
+              sudo docker-compose up -f home/foodgram-project/docker-compose.yaml
 
   send_message:
     runs-on: ubuntu-latest
