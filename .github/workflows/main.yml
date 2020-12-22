@@ -50,7 +50,6 @@ jobs:
             password: ${{ secrets.ROOT_PASS }}
             script: |
               cd home/foodgram-project
-              mv docker-compose.yaml .
               sudo docker pull jetdj/foodgram
               sudo docker rmi jetdj/foodgram -f
               sudo docker-compose up -d
