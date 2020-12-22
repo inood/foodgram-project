@@ -11,15 +11,12 @@ def load():
         data = json.load(file)
     if data:
         for item in data:
-            if BaseIngredient.objects.filter(title=item['title'],
-                                             unit=item['dimension']).exist():
-                new_ingregient = BaseIngredient(title=item['title'],
-                                                unit=item['dimension'])
-                new_ingregient.save()
+            new_ingregient = BaseIngredient(title=item['title'],
+                                            unit=item['dimension'])
+            new_ingregient.save()
 
 
 class Command(BaseCommand):
     help = 'Загрузка ингредиентов',
-
     def handle(self, *args, **options):
         load()
