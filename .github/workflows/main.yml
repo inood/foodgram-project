@@ -39,7 +39,7 @@ jobs:
             username: ${{ secrets.ROOT_NAME }}
             password: ${{ secrets.ROOT_PASS }}
             strip_components: 1
-            source: '.env, nginx/default.conf, docker-compose.yaml'
+            source: './.env, nginx/default.conf, ./docker-compose.yaml'
             target: '/home/code'
 
         - name: executing remote ssh commands to deploy
