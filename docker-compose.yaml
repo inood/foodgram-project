@@ -25,6 +25,7 @@ services:
 
   nginx:
     image: nginx:1.19.4
+    restart: unless-stopped
     volumes:
       - ./static:/code/static
       - ./media:/code/media
