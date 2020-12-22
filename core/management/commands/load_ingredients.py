@@ -11,9 +11,11 @@ def load():
         data = json.load(file)
     if data:
         for item in data:
-            new_ingregient = BaseIngredient(title=item['title'],
-                                            unit=item['dimension'])
-            new_ingregient.save()
+            if BaseIngredient.objects.filter(title=item['title'],
+                                             unit=item['dimension']).exist():
+                new_ingregient = BaseIngredient(title=item['title'],
+                                                unit=item['dimension'])
+                new_ingregient.save()
 
 
 class Command(BaseCommand):
