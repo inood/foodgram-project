@@ -38,7 +38,8 @@ jobs:
             script: |
               sudo docker rmi jetdj/foodgram -f
               sudo docker pull jetdj/foodgram:latest
-              sudo docker run jetdj/foodgram:latest
+              sudo cd foodgram-project
+              sudo docker-compose -f docker-compose.yaml up --force-recreate -d web
 
   send_message:
     runs-on: ubuntu-latest
