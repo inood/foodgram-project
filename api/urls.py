@@ -4,10 +4,15 @@ from api import views
 
 urlpatterns = [
     path('ingredients/', views.ingredients, name='index'),
-    path('subscriptions/', views.SubscriptionAddAPIView.as_view()),
-    path('subscriptions/<int:pk>/', views.SubscriptionDeleteAPIView.as_view()),
-    path('favorites/', views.FavoriteAddAPIView.as_view()),
-    path('favorites/<int:pk>', views.FavoriteDeleteAPIView.as_view()),
-    path('purchases/', views.CartAddAPIView.as_view()),
-    path('purchases/<int:pk>', views.CartDeleteAPIView.as_view()),
+    path('subscriptions/', views.SubscriptionView.as_view(),
+         name='subscriptions_add'),
+    path('subscriptions/<int:pk>/', views.SubscriptionView.as_view(),
+         name='subscriptions_remove'),
+    path('favorites/', views.FavoriteView.as_view(), name='favorite_add'),
+    path('favorites/<int:pk>/', views.FavoriteView.as_view(),
+         name='favorite_remove'),
+    path('purchases/', views.PurchaseView.as_view(), name='purchase_add'),
+    path('purchases/<int:pk>/', views.PurchaseView.as_view(),
+         name='purchase_remove'),
+
 ]

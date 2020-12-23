@@ -1,10 +1,9 @@
 from django.http import JsonResponse
-from rest_framework.generics import CreateAPIView, DestroyAPIView
-from rest_framework.permissions import AllowAny
+from rest_framework.generics import CreateAPIView, DestroyAPIView, \
+    get_object_or_404
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from api.serializers import (CartSerializer, FavoriteSerializer,
-                             SubscribeSerializer)
 from core.models import (BaseIngredient, Cart, Favorite, Recipe, Subscription,
                          get_user_model)
 
@@ -27,54 +26,52 @@ def ingredients(request):
     return JsonResponse(response_data, safe=False)
 
 
-class SubscriptionAddAPIView(CreateAPIView):
-    serializer_class = SubscribeSerializer
+class SubscriptionView(APIView):
+    def post(self, request):
+        following = get_object_or_404(User, id=request.data.get('id'))
+        obj, created = Subscription.objects.get_or_create(user=request.user,
+                                                       author=following)
+        if created:
+            return Response({'status': '201'})
+        return Response({"status": '302'})
+
+    def delete(self, request, pk):
+        following = get_object_or_404(User, id=pk)
+        subscribe = get_object_or_404(Subscription, user=request.user,
+                                          author=following)
+        subscribe.delete()
+        return Response({"status": '204'})
 
 
-class SubscriptionDeleteAPIView(DestroyAPIView):
-    serializer_class = SubscribeSerializer
-    queryset = User.objects.all()
+class FavoriteView(APIView):
+    def post(self, request):
+        recipe = get_object_or_404(Recipe, id=request.data.get('id'))
+        obj, created = Favorite.objects.get_or_create(user=request.user,
+                                                      recipe=recipe)
+        if created:
+            return Response({'status': '201'})
+        return Response({"status": '302'})
 
-    def destroy(self, request, *args, **kwargs):
-        Subscription.objects.filter(
-            user=self.request.user, author=self.get_object()
-        ).delete()
-        return Response(data={"success": True})
-
-
-class FavoriteAddAPIView(CreateAPIView):
-    serializer_class = FavoriteSerializer
-
-
-class FavoriteDeleteAPIView(DestroyAPIView):
-    serializer_class = FavoriteSerializer
-    queryset = Recipe.objects.all()
-
-    def destroy(self, request, *args, **kwargs):
-        Favorite.objects.filter(
-            user=self.request.user, recipe=self.get_object()
-        ).delete()
-        return Response(data={"success": True})
+    def delete(self, request, pk):
+        recipe = get_object_or_404(Recipe, id=pk)
+        favorite = get_object_or_404(Favorite, user=request.user,
+                                         recipe=recipe)
+        favorite.delete()
+        return Response({"status": '204'})
 
 
-class CartAddAPIView(CreateAPIView):
-    serializer_class = CartSerializer
-    queryset = Recipe.objects.all()
-    permission_classes = [AllowAny]
+class PurchaseView(APIView):
+    def post(self, request):
+        recipe = get_object_or_404(Recipe, id=request.data.get('id'))
+        obj, created = Cart.objects.get_or_create(user=request.user,
+                                                      recipe=recipe)
+        if created:
+            return Response({'status': '201'})
+        return Response({"status": '302'})
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save(request=request)
-        return Response(data={"success": True})
-
-
-class CartDeleteAPIView(DestroyAPIView):
-    serializer_class = CartSerializer
-    queryset = Recipe.objects.all()
-
-    def destroy(self, request, *args, **kwargs):
-        Cart.objects.filter(
-            user=self.request.user, recipe=self.get_object()
-        ).delete()
-        return Response(data={"success": True})
+    def delete(self, request, pk):
+        recipe = get_object_or_404(Recipe, id=pk)
+        purchase = get_object_or_404(Cart, user=request.user,
+                                         recipe=recipe)
+        purchase.delete()
+        return Response({"status": '204'})
