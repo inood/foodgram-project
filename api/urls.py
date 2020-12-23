@@ -14,5 +14,4 @@ urlpatterns = [
     path('purchases/', views.PurchaseView.as_view(), name='purchase_add'),
     path('purchases/<int:pk>/', views.PurchaseView.as_view(),
          name='purchase_remove'),
-
 ]

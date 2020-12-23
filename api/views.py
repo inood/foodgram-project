@@ -1,6 +1,5 @@
 from django.http import JsonResponse
-from rest_framework.generics import CreateAPIView, DestroyAPIView, \
-    get_object_or_404
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
