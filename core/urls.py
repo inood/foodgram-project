@@ -12,4 +12,6 @@ urlpatterns = [
     path('subscribe/', views.subscribe, name='subscribe'),
     path('favorite/', views.favorite, name='favorite'),
     path('cart/', views.cart, name='cart'),
+    path('cart/download/', views.cart_list_download,
+         name='cart_list_download'),
 ]
