@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+{% csrf_token %}
 <main class="main container">
 
     <div class="main__header">
@@ -15,11 +16,9 @@
     </div>
 
     <div class="card-list">
-{#    ----------------------    #}
     {% for subscription in page %}
         {% include "base/subscribe_items.html" with subscription=subscription recipe=recipe %}
     {% endfor %}
-
     </div>
 
         {% if page.has_other_pages %}
@@ -37,5 +36,5 @@
     <script src="{% static 'js/components/MyFollow.js' %}"></script>
     <script src="{% static 'js/components/Header.js' %}"></script>
     <script src="{% static 'js/api/Api.js' %}"></script>
-    <script src="{% static 'myFollow.js' %}"></script>
+    <script src="{% static 'js/forms/myFollow.js' %}"></script>
 {% endblock %}

@@ -16,7 +16,7 @@ def subscribe(request):
     for sub in subscribtions:
         recipe[sub] = Recipe.objects.filter(
             author=sub
-        )[:3]
+        )
 
     paginator = Paginator(subscribtions, ITEM_COUNT)
     page_number = request.GET.get('page')

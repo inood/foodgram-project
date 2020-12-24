@@ -7,10 +7,9 @@
         <div class="card-user__body">
 
             <ul class="card-user__items">
-
                 {% for author, recipes in recipe.items %}
                     {% if author == subscription%}
-                        {% for recipe in recipes %}
+                        {% for recipe in recipes|slice:":3" %}
                             <li class="card-user__item">
                                 <div class="recipe">
                                     {% load thumbnail %}
@@ -23,20 +22,22 @@
                             </li>
                         {% endfor%}
                     {% endif %}
+                     {% if recipes.count > 3 %}
+                         <li class="card-user__item">
+                            <a href="{% url 'profile' username=subscription.username %}" class="card-user__link link">Еще рецептов: {{ recipes.count|add:-3 }}</a>
+                         </li>
+                    {% endif %}
+
                 {% endfor %}
 
-                {% if subscription.recipe_count > 3 %}
-                <li class="card-user__item">
-                    <a href="{% url 'profile' username=subscription.username %}" class="card-user__link link">Еще рецептов: {{ subscription.recipe_count|add:-3 }}</a>
-                </li>
-                {% endif %}
-
             </ul>
+
+
+
 
         </div>
 
         <div class="card-user__footer">
             <button class="button button_style_light-blue button_size_auto" name="subscribe">Отписаться</button>
         </div>
-
     </div>

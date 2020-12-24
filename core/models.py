@@ -57,7 +57,7 @@ class Ingredient(models.Model):
     item = models.ForeignKey(BaseIngredient,
                              verbose_name='Ингредиент',
                              on_delete=models.CASCADE)
-    count = models.IntegerField(verbose_name='Количество')
+    count = models.PositiveIntegerField(verbose_name='Количество')
 
     def __str__(self):
         return f'{self.item} - {self.count}'
@@ -78,7 +78,8 @@ class Recipe(models.Model):
         verbose_name='Ингредиенты')
 
     tags = models.ManyToManyField(Tag, verbose_name='тэги')
-    cooking_time = models.IntegerField(verbose_name='Время приготовления')
+    cooking_time = models.PositiveIntegerField(
+        verbose_name='Время приготовления')
     slug = models.SlugField(blank=True, null=True)
     image = models.ImageField(
         upload_to='main_image/',
