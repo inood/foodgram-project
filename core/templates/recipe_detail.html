@@ -65,16 +65,33 @@
                                     href="{% url 'recipe_edit' recipe.id %}"
                                     class="single-card__text">Редактировать
                                 рецепт</a></li>
+                            <li class="single-card__item"><a
+                                    style="margin-left: 2.5em"
+                                    href="{% url 'recipe_delete' recipe_id=recipe.id %}"
+                                    class="single-card__text">Удалить
+                                рецепт</a></li>
                         {% endif %}
                     </ul>
                 </div>
                 <ul class="single-card__items">
                     {% if request.user.is_authenticated %}
                         {% if not request|is_in_purchases:recipe %}
-                            <li class="single-card__item"><button class="button button_style_blue" name="purchases" data-out><span class="icon-plus button-icon"></span> Добавить в покупки</button></li>
+                            <li class="single-card__item">
+                                <button class="button button_style_blue"
+                                        name="purchases" data-out><span
+                                        class="icon-plus button-icon"></span>
+                                    Добавить в покупки
+                                </button>
+                            </li>
                         {% else %}
-                            <li class="single-card__item"><button class="button button_style_blue-outline" name="purchases"><span class="icon-check button-icon"></span> Рецепт добавлен</button></li>
-                        {% endif%}
+                            <li class="single-card__item">
+                                <button class="button button_style_blue-outline"
+                                        name="purchases"><span
+                                        class="icon-check button-icon"></span>
+                                    Рецепт добавлен
+                                </button>
+                            </li>
+                        {% endif %}
 
                     {% if user.is_authenticated and user != recipe.author %}
                         <li class="single-card__item">

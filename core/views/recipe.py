@@ -76,7 +76,7 @@ def recipe_delete(request, recipe_id):
         )
 
     recipe.delete()
-    return redirect('profile', username=request.user)
+    return render(request, 'recipe_is_delete.html')
 
 
 @login_required
