@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from core.backends import get_ingredients, get_tags
 from core.forms import RecipeForm
-from core.models import Ingredient, Recipe, Subscription, Tag
+from core.models import Ingredient, Recipe, Subscription, Tag, BaseIngredient
 
 User = get_user_model()
 
@@ -93,31 +93,32 @@ def recipe_edit(request, recipe_id):
         )
 
     if request.method == 'POST':
-        new_tags = get_tags(request)
+        ingredients = get_ingredients(request)
         form = RecipeForm(
-            request.POST,
+            request.POST or None,
             files=request.FILES or None,
+            instance=recipe
         )
 
         if form.is_valid():
+
             edit_recipe = form.save(commit=False)
             edit_recipe.author = request.user
             edit_recipe.save()
-            edit_recipe.recipe_amount.all().delete()
-            ingredients = get_ingredients(request)
-
+            edit_recipe.tags.clear()
+            edit_recipe.ingredients.clear()
             for ingredient, quantity in ingredients.items():
                 ing, created = Ingredient.objects.get_or_create(
                     item=ingredient,
                     count=quantity)
-
                 edit_recipe.ingredients.add(ing)
-
-            edit_recipe.tags.set(new_tags)
+            form.save()
             return redirect(
                 'profile',
                 username=request.user.username
             )
+        else:
+            print(form.errors)
 
     form = RecipeForm(instance=recipe)
     return render(request, 'recipe_edit.html', {
