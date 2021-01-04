@@ -30,7 +30,7 @@ class RecipeAdmin(admin.ModelAdmin):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    list_display = ['title', 'is_basic']
+    list_display = ['id','title', 'is_basic']
 
 
 @admin.register(Subscription)
