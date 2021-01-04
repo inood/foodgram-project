@@ -20,7 +20,7 @@ def index(request):
         'tags'
     ).distinct()
 
-    all_tags = Tag.objects.filter(is_basic=True)
+    all_tags = Tag.objects.filter(is_basic=True).order_by('id')
 
     paginator = Paginator(recipe_list, ITEM_COUNT)
     page_number = request.GET.get('page')
