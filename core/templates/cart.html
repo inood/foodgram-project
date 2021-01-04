@@ -24,7 +24,9 @@
                         {% thumbnail recipe.image "960x339" as im %}
                         <img src="{{ im.url }}" class="recipe__image recipe__image_big">
                         {% endthumbnail %}
-                        <h3 class="recipe__title">{{ recipe.title }}</h3>
+                        <h3 class="recipe__title">
+                           <a class="card__title link" href="{% url 'recipe_detail' recipe.id  %}" target="_blank">{{ recipe.title}}</a>
+                        </h3>
                         <p class="recipe__text"><span class="icon-time"></span>&#160;&#160;{{ recipe.cooking_time }}&#160;мин</p>
                     </div>
                      <button class="button shopping-list__button link">Удалить</button>

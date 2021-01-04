@@ -17,7 +17,11 @@
                                         <img src="{{ im.url }}"
                                              class="recipe__image">
                                     {% endthumbnail %}
-                                    <h3 class="recipe__title">{{ recipe.title }}</h3>
+                                    <h3 class="recipe__title">
+                                        <a class="card__title link" href="{% url 'recipe_detail' recipe.id  %}" target="_blank">{{ recipe.title}}</a>
+
+                                    </h3>
+
                                     <p class="recipe__text"><span
                                             class="icon-time"></span>&#160;&#160;{{ recipe.cooking_time }}&#160;мин
                                     </p>
@@ -36,7 +40,7 @@
             </ul>
         </div>
 
-        <div class="card-user__footer">
-            <button class="button button_style_light-blue button_size_auto" name="subscribe">Отписаться</button>
-        </div>
+         <div class="card-user__footer">
+                <button class="button button_style_light-blue button_size_auto" name="subscribe">Отписаться от автора</button>
+         </div>
     </div>
