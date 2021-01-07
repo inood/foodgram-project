@@ -1,6 +1,6 @@
 <div class="card-user" data-id="{{ subscription.id }}">
         <div class="card-user__header">
-            <h2 class="card-user__title">{{ subscription }}</h2>
+           <a href="{% url 'profile' subscription %}"><h2 class="card-user__title">{{ subscription }}</h2></a>
         </div>
 
         <div class="card-user__body">
