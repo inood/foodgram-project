@@ -3,7 +3,7 @@ const counterId = document.querySelector('#counter');
 const api = new Api(apiUrl);
 const header = new Header(counterId);
 const configButton = {
-   subscribe: {
+    subscribe: {
         attr: 'data-out',
         default: {
             class: 'button_style_blue',
@@ -20,4 +20,3 @@ const myFollow = new MyFollow(container, '.card-user', header, api, true,{
     subscribe
 })
 myFollow.addEvent();
-

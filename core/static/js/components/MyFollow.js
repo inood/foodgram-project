@@ -7,11 +7,11 @@ class MyFollow extends MainCards{
     }
 
     _eventSubscribe  (target)  {
-        const authorId = target.closest(this.card).getAttribute('data-author');
+        const cardId = target.closest(this.card).getAttribute('data-id');
         if(target.hasAttribute('data-out')) {
-            this.button.subscribe.addSubscribe(target, authorId)
+            this.button.subscribe.addSubscribe(target,cardId)
         } else {
-            this.button.subscribe.removeSubscribe(target, authorId)
+            this.button.subscribe.removeSubscribe(target,cardId)
         }
     }
 
