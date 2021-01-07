@@ -15,7 +15,7 @@ def profile(request, username):
         tags_from_filter = Tag.objects.filter(is_basic=True).values_list(
             'value', flat=True)
 
-    all_tags = Tag.objects.filter(is_basic=True)
+    all_tags = Tag.objects.filter(is_basic=True).order_by('id')
 
     profile_user = get_object_or_404(User, username=username)
 

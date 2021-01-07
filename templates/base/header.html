@@ -2,7 +2,14 @@
   <nav class="nav">
       <div class="nav__container container">
           <ul class="nav__items list">
-              <li class="nav__item {% if request.path == '/' %} nav__item_active {% endif %}"><a href="{% url 'index' %}" class="nav__link link">Рецепты</a></li>
+                {% if request.path == '/' %}
+                     <li class="nav__item nav__item_active"><a href="{% url 'index' %}" class="nav__link link">Рецепты</a></li>
+                {% elif profile%}
+                       <li class="nav__item nav__item_active"><a href="{% url 'index' %}" class="nav__link link">Рецепты</a></li>
+                {% else %}
+                     <li class="nav__item"><a href="{% url 'index' %}" class="nav__link link">Рецепты</a></li>
+                {% endif %}
+
               {% if user.is_authenticated %}
               <li class="nav__item {% if request.path == '/subscribe/' %} nav__item_active {% endif %}"><a href="{% url 'subscribe' %}" class="nav__link link">Мои подписки</a></li>
               <li class="nav__item {% if request.path == '/recipe_create/' %} nav__item_active {% endif %}"><a href="{% url 'recipe_create' %}" class="nav__link link">Создать рецепт</a></li>
