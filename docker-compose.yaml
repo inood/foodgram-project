@@ -4,7 +4,7 @@ volumes:
 
 services:
   db:
-    image: postgres:13.0-alpine
+    image: postgres:13.1-alpine
     volumes:
       - post_data:/var/lib/postgresql/data/
     env_file:
@@ -23,7 +23,7 @@ services:
       - ./.env
 
   nginx:
-    image: nginx:1.19.4
+    image: nginx:1.19.4-alpine
     restart: always
     volumes:
       - ./static:/code/static/
